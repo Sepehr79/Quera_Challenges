@@ -6,6 +6,10 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Express a dependency graph
+ * @param <DT> Generic datatype
+ */
 @Getter
 public class DependencyGraph<DT> {
 
@@ -20,6 +24,11 @@ public class DependencyGraph<DT> {
         this.dependencies.addAll(Arrays.asList(dependencies));
     }
 
+    /**
+     * Navigation graph to find dependencies from input dependency
+     * @param dtDependency input dependency
+     * @return set of all dependencies
+     */
     public Set<Dependency<DT>> getAllDependenciesFrom(Dependency<DT> dtDependency){
         Set<Dependency<DT>> visited = new HashSet<>(dtDependency.getChildDependencies());
         Set<Dependency<DT>> set = new HashSet<>(dtDependency.getChildDependencies());
@@ -40,3 +49,4 @@ public class DependencyGraph<DT> {
         return visited;
     }
 }
+
