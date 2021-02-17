@@ -1,12 +1,13 @@
 package highest_dependency.algorithm;
 
-import lombok.Getter;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-@Getter
+/**
+ * Express a dependency graph
+ * @param <DT> Generic datatype
+ */
 public class DependencyGraph<DT> {
 
     private final Set<Dependency<DT>> dependencies = new HashSet<>();
@@ -15,11 +16,16 @@ public class DependencyGraph<DT> {
         return dependencies.add(dtDependency);
     }
 
-    @SafeVarargs
+
     public final void addDependencies(Dependency<DT>... dependencies){
         this.dependencies.addAll(Arrays.asList(dependencies));
     }
 
+    /**
+     * Navigation graph to find dependencies from input dependency
+     * @param dtDependency input dependency
+     * @return set of all dependencies
+     */
     public Set<Dependency<DT>> getAllDependenciesFrom(Dependency<DT> dtDependency){
         Set<Dependency<DT>> visited = new HashSet<>(dtDependency.getChildDependencies());
         Set<Dependency<DT>> set = new HashSet<>(dtDependency.getChildDependencies());
@@ -38,5 +44,9 @@ public class DependencyGraph<DT> {
             set = nextSet;
         }
         return visited;
+    }
+
+    public Set<Dependency<DT>> getDependencies() {
+        return dependencies;
     }
 }

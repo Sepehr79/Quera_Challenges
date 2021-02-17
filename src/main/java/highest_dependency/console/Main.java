@@ -10,15 +10,26 @@ import java.util.Scanner;
 public class Main {
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
+
+        // input number
         int count = -1;
+
+        // list of output numbers
         List<Integer> outputs = new ArrayList<>();
 
-        while (count != 0){
+        while (true){
+            // input check*******
             count = scanner.nextInt();
+            if (count == 0)
+                break;
+
+            // fix buffer
             scanner.nextLine();
+            //******************
 
             DependencyGraph<Integer> dependencyGraph = new DependencyGraph<>();
             List<Dependency<Integer>> dependencies = new ArrayList<>();
+
             for (int i = 0; i < count; i++)
                 dependencies.add(new Dependency<Integer>(i));
 
@@ -46,7 +57,6 @@ public class Main {
             outputs.add(index);
         }
 
-        outputs.remove(outputs.size()-1);
         for (Integer num: outputs)
             System.out.println(num);
     }
