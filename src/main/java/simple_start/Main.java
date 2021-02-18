@@ -2,21 +2,21 @@ package simple_start;
 
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
 
         int B = scanner.nextInt();
-        for (int i = 1; i <= 300 ; i++){
-            int power = i * i;
-
+        IntStream.rangeClosed(1, 300).filter(i -> {
+            return isSymmetryText(baseConversion(String.valueOf(i*i), 10, B));
+        }).forEach(i ->{
             String number = baseConversion(String.valueOf(i), 10, B);
-            String baseNumber = baseConversion(String.valueOf(power), 10, B);
+            String base = baseConversion(String.valueOf(i * i), 10, B);
 
-            if (isSymmetryText(baseNumber))
-                System.out.println(number + " " + baseNumber);
-        }
+            System.out.println(number + " " + base);
+        });
 
     }
 
